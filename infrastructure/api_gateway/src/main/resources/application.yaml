@@ -1,0 +1,52 @@
+server:
+  port: 80
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    #开启从注册中心动态生成路由的功能，用微服务名进行路由
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service_edu           #路由的ID，没有固定规则但要求唯一，建议配合服务名
+          #uri: http://localhost:8001  #匹配后提供服务的路由地址
+          uri: lb://service-edu     #8001
+          predicates:
+            - Path=/eduservice/**    #断言，路径相匹配的进行路由
+        - id: service_ucenter
+          uri: lb://service-ucenter #8006
+          predicates:
+            - Path=/educenter/**
+        - id: service_cms
+          uri: lb://service-cms     #8004
+          predicates:
+            - Path=/educms/**
+        - id: service_msm
+          uri: lb://service-msm      #8005
+          predicates:
+            - Path=/edumsm/**
+        - id: service_order
+          uri: lb://service-order   #8007
+          predicates:
+            - Path=/eduorder/**
+        - id: service_oss
+          uri: lb://service-oss   #8002
+          predicates:
+            - Path=/eduoss/**
+        - id: service_statistics
+          uri: lb://service-statistics   #8008
+          predicates:
+            - Path=/staservice/**
+        - id: service_vod
+          uri: lb://service-vod    #8003
+          predicates:
+            - Path=/eduvod/**
+        - id: service_acll
+          uri: lb://service-acll    #8009
+          predicates:
+            - Path=/admin/**
