@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: service-msm
+  profiles:
+    active: dev
+  #返回的时区格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  redis:
+    host:
+    password:
+    port: 6379
+    database: 0
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+
+
+server:
+  port: 8005
+
+
+aliyun:
+  accessKeyId:
+  accessKeySecret:
+
+mail:
+  user:
+  password:
