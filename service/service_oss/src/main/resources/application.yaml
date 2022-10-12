@@ -1,0 +1,29 @@
+#服务端口号
+server:
+  port: 8002
+
+#服务名
+spring:
+  application:
+    name: service-oss
+  #环境
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+#阿里云OSS
+aliyun:
+  oss:
+    file:
+      endpoint:
+      key_id:
+      key_secret:
+      #bucket可以在控制台创建，也可以使用java代码创建
+      bucket_name:
