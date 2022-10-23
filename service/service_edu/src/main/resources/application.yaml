@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: service-edu
+  server:
+    port: 8001
+  profiles:
+    active: dev
+  datasource:
+    #连接池类型
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #高版本的MySql驱动需要增加时区
+    url: jdbc:mysql://localhost:3306/guli_edu?serverTimezone=GMT%2B8
+    username: root
+    password: admin
+    hikari:
+      #连接测试查询
+      connection-test-query: SELECT 1
+      #连接超时时长 60s=1min
+      connection-timeout: 60000
+      #空闲连接超时时间，默认值600000(10分钟),只有空闲连接数大于最大连接数且空闲时间超过该值，才会被释放
+      idle-timeout: 500000
+      #最大存活时间 540s=9min
+      max-lifetime: 540000
+      #最大连接数量
+      maximum-pool-size: 12
+      #最小空闲连接
+      minimum-idle: 10
+      #连接池名称
+      pool-name: HikariPool
+  #返回的时区格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #nacos注册中心地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+mybatis-plus:
+  configuration:
+    #sql查询打印到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #mapper的位置
+  mapper-locations: classpath:com/example/mapper/xml/*.xml
+  global-config:
+    db-config:
+      #逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      #逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+#springboot的日志级别
+logging:
+  level:
+    root: info
+
+
